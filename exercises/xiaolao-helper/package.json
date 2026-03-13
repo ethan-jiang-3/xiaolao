@@ -1,0 +1,16 @@
+{
+  "name": "xiaolao-helper",
+  "version": "1.0.0",
+  "description": "虾家族 CLI 工具 - 天气、汇率查询",
+  "main": "main.js",
+  "bin": {
+    "xiaolao-helper": "./main.js"
+  },
+  "scripts": {
+    "test": "node main.js --help"
+  },
+  "keywords": ["cli", "weather", "exchange-rate"],
+  "author": "虾家族",
+  "license": "MIT",
+  "packageManager": "pnpm@10.23.0"
+}
