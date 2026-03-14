@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1773503267088" clover="3.2.0">
+  <project timestamp="1773503267088" name="All files">
+    <metrics statements="37" coveredstatements="37" conditionals="6" coveredconditionals="6" methods="17" coveredmethods="17" elements="60" coveredelements="60" complexity="0" loc="37" ncloc="37" packages="1" files="2" classes="2"/>
+    <file name="Task.ts" path="/Users/ethan/xlao/projects/task-manager/src/engine/Task.ts">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <line num="12" count="1" type="stmt"/>
+      <line num="26" count="1" type="stmt"/>
+    </file>
+    <file name="TaskManager.ts" path="/Users/ethan/xlao/projects/task-manager/src/engine/TaskManager.ts">
+      <metrics statements="35" coveredstatements="35" conditionals="6" coveredconditionals="6" methods="17" coveredmethods="17"/>
+      <line num="16" count="1" type="stmt"/>
+      <line num="17" count="7" type="stmt"/>
+      <line num="19" count="7" type="stmt"/>
+      <line num="21" count="7" type="stmt"/>
+      <line num="23" count="7" type="stmt"/>
+      <line num="34" count="10" type="stmt"/>
+      <line num="43" count="10" type="stmt"/>
+      <line num="44" count="10" type="stmt"/>
+      <line num="46" count="10" type="stmt"/>
+      <line num="57" count="3" type="stmt"/>
+      <line num="68" count="6" type="stmt"/>
+      <line num="70" count="6" type="cond" truecount="1" falsecount="0"/>
+      <line num="71" count="1" type="stmt"/>
+      <line num="74" count="5" type="cond" truecount="1" falsecount="0"/>
+      <line num="75" count="1" type="stmt"/>
+      <line num="78" count="4" type="stmt"/>
+      <line num="84" count="4" type="stmt"/>
+      <line num="85" count="4" type="stmt"/>
+      <line num="87" count="4" type="stmt"/>
+      <line num="98" count="4" type="stmt"/>
+      <line num="100" count="4" type="cond" truecount="2" falsecount="0"/>
+      <line num="110" count="9" type="stmt"/>
+      <line num="121" count="6" type="stmt"/>
+      <line num="132" count="2" type="stmt"/>
+      <line num="134" count="2" type="stmt"/>
+      <line num="135" count="1" type="stmt"/>
+      <line num="147" count="2" type="stmt"/>
+      <line num="149" count="2" type="stmt"/>
+      <line num="150" count="1" type="stmt"/>
+      <line num="161" count="10" type="stmt"/>
+      <line num="163" count="10" type="stmt"/>
+      <line num="165" count="10" type="stmt"/>
+      <line num="176" count="14" type="stmt"/>
+      <line num="177" count="5" type="stmt"/>
+      <line num="189" count="32" type="stmt"/>
+    </file>
+  </project>
+</coverage>
