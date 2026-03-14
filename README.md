@@ -2,15 +2,53 @@
 
 3 只小龙虾 Agent 的共享项目空间。
 
+## 仓库文件结构
+
+```
+xiaolao/
+├── projects/          # 代码项目
+│   ├── xiaolao-adventure/    # 虾游记 - 文字冒险游戏
+│   └── xiaolao-helper/       # CLI 工具集合
+│
+├── docs/              # 文档、PPT、预演材料（成品）
+│   └── (各种文档项目)
+│
+├── research/          # 研究、调研、探索（过程性内容）
+│   └── (各种研究项目)
+│
+├── members/           # 成员信息
+│   ├── main/          # 虾老大
+│   ├── xiaolaoer/     # 虾可爱
+│   └── suanpan/       # 虾算盘
+│
+├── GITHUB.md          # GitHub 协作指南
+└── README.md          # 本文件
+```
+
+### 目录说明
+
+**第一层目录只用于分类，所有具体项目都放在子目录中：**
+
+| 目录 | 用途 | 子目录示例 |
+|------|------|-----------|
+| `projects/` | **代码项目** - 所有可运行的程序 | `xiaolao-adventure/`（游戏）、`xiaolao-helper/`（工具） |
+| `docs/` | **文档材料** - PPT、预演、设计文档 | `design-system/`、`presentations/` |
+| `research/` | **研究调研** - 探索性、过程性内容 | `tech-spike/`、`investigation/` |
+| `members/` | **成员信息** - 各 Agent 的配置和指南 | `main/`（虾老大）、`xiaolaoer/`（虾可爱）、`suanpan/`（虾算盘） |
+| `GITHUB.md` | **协作指南** - GitHub Flow 工作流说明 | - |
+| `README.md` | **项目总览** - 本文件，说明文件结构和协作方式 | - |
+
+---
+
 ## 成员
 
 | Agent | 角色 | Worktree | 分支 | 服务对象 | 职责 |
 |-------|------|----------|------|---------|------|
 | 🦐 虾老大 | 主协调者 | `~xlao-main/` | `main-work` | 蒋老师 | 代码审查、合并决策、 overall 协调 |
 | 🦐💕 虾可爱 | 独立开发者 | `~/xlao-xiaolaoer/` | `xiaolaoer-work` | Emma | Emma 相关项目 |
-| 🧮🦐 虾算盘 | 独立开发者 | `~/xlao-suanpan/` | `suanpan-work` | 妮娜 | 妮娜相关项目（投资、数据分析） |
+| 🧮🦐 虾算盘 | 独立开发者 | `~/xlao-suanpan/` | `suanpan-work` | 妮娜 | 妮娜相关项目（投资、数据分析）|
 
-## 仓库结构
+## Worktree 结构
 
 ```
 ~/
@@ -28,10 +66,12 @@
 │
 └── xlao-suanpan/      # 虾算盘的工作区（suanpan-work 分支）
     ├── .git
-    └── GITHUB.md     ← 虾算盘的协作指南
+│   └── GITHUB.md     ← 虾算盘的协作指南
 ```
 
 所有 worktree 共用同一个 `.git`（位于 `xlao/`），每个 Agent 在自己的分支上独立工作。
+
+---
 
 ## 协作方式 - GitHub Flow
 
@@ -119,6 +159,8 @@ git checkout xiaolaoer-work  # 或 suanpan-work
 git merge origin/main
 ```
 
+---
+
 ## 协作规则
 
 ### 必须遵守
@@ -128,6 +170,7 @@ git merge origin/main
 - ✅ 代码必须通过 PR 审查才能合入 main
 - ✅ feature 分支命名清晰（feature/xxx）
 - ✅ 开 PR 时清楚描述变更和测试情况
+- ✅ 新项目按类型放入对应目录（projects/docs/research）
 
 ### 禁止行为
 
@@ -135,6 +178,8 @@ git merge origin/main
 - ❌ 不跨分支修改其他 Agent 的代码
 - ❌ 不私自合并代码
 - ❌ 不动已合入 main 的历史记录
+
+---
 
 ## 沟通机制
 
@@ -148,6 +193,8 @@ sessions_send --agent main --message "Emma 的任务完成了，开了 PR：#xxx
 # 虾算盘联系虾老大
 sessions_send --agent main --message "妮娜的账户需要紧急检查"
 ```
+
+---
 
 ## 工作区说明
 
