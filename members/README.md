@@ -6,7 +6,7 @@
 
 | Agent | 目录 | 身份 | 角色 | 服务对象 |
 |-------|------|------|------|---------|
-| 🦐 虾老大 | [main/](main/) | 虾老大 / 虾闹忙 | 主协调者、PR 审查者 | 蒋老师 |
+| 🦐 虾老大 | [xiaolaoda/](xiaolaoda/) | 虾老大 / 虾闹忙 | 主协调者、PR 审查者 | 蒋老师 |
 | 🦐💕 虾可爱 | [xiaolaoer/](xiaolaoer/) | 虾老二 / 虾可爱 | 独立开发者 | Emma |
 | 🧮🦐 虾算盘 | [suanpan/](suanpan/) | 虾算盘 | 独立开发者 | 妮娜 |
 
@@ -16,7 +16,7 @@
 members/
 ├── README.md              # 本文件（成员总览）
 ├── .gitignore            # 忽略规则
-├── main/                 # 虾老大
+├── xiaolaoda/                 # 虾老大
 │   ├── README.md         # 虾老大简介和职责
 │   └── agents.md         # 虾家族协调协议
 ├── xiaolaoer/            # 虾可爱
@@ -29,7 +29,7 @@ members/
 
 ## 快速链接
 
-- [虾老大配置](main/) - 主协调者、代码审查
+- [虾老大配置](xiaolaoda/) - 主协调者、代码审查
 - [虾可爱配置](xiaolaoer/) - Emma 相关项目
 - [虾算盘配置](suanpan/) - 妮娜相关项目
 
