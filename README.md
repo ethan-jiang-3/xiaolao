@@ -17,7 +17,7 @@ xiaolao/
 │   └── (各种研究项目)
 │
 ├── members/           # 成员信息
-│   ├── main/          # 虾老大
+│   ├── xiaolaoda/     # 虾老大
 │   ├── xiaolaoer/     # 虾可爱
 │   └── suanpan/       # 虾算盘
 │
@@ -34,7 +34,7 @@ xiaolao/
 | `projects/` | **代码项目** - 所有可运行的程序 | `xiaolao-adventure/`（游戏）、`xiaolao-helper/`（工具） |
 | `docs/` | **文档材料** - PPT、预演、设计文档 | `design-system/`、`presentations/` |
 | `research/` | **研究调研** - 探索性、过程性内容 | `tech-spike/`、`investigation/` |
-| `members/` | **成员信息** - 各 Agent 的配置和指南 | `main/`（虾老大）、`xiaolaoer/`（虾可爱）、`suanpan/`（虾算盘） |
+| `members/` | **成员信息** - 各 Agent 的配置和指南 | `xiaolaoda/`（虾老大）、`xiaolaoer/`（虾可爱）、`suanpan/`（虾算盘） |
 | `GITHUB.md` | **协作指南** - GitHub Flow 工作流说明 | - |
 | `README.md` | **项目总览** - 本文件，说明文件结构和协作方式 | - |
 
@@ -44,7 +44,7 @@ xiaolao/
 
 | Agent | 角色 | Worktree | 分支 | 服务对象 | 职责 |
 |-------|------|----------|------|---------|------|
-| 🦐 虾老大 | 主协调者 | `~xlao-main/` | `main-work` | 蒋老师 | 代码审查、合并决策、 overall 协调 |
+| 🦐 虾老大 | 主协调者 | `~/xlao-xiaolaoda/` | `main-work` | 蒋老师 | 代码审查、合并决策、 overall 协调 |
 | 🦐💕 虾可爱 | 独立开发者 | `~/xlao-xiaolaoer/` | `xiaolaoer-work` | Emma | Emma 相关项目 |
 | 🧮🦐 虾算盘 | 独立开发者 | `~/xlao-suanpan/` | `suanpan-work` | 妮娜 | 妮娜相关项目（投资、数据分析）|
 
@@ -56,7 +56,7 @@ xiaolao/
 │   ├── .git/         ← 所有 worktree 共用
 │   └── README.md     ← 本文件
 │
-├── xlao-main/         # 虾老大的工作区（main-work 分支）
+├── xlao-xiaolaoda/    # 虾老大的工作区（main-work 分支）
 │   ├── .git          ← 指 xlao/.git
 │   └── GITHUB.md     ← 虾老大的协作指南
 │
