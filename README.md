@@ -101,7 +101,7 @@ xiaolao/
 
 ```bash
 # 虾老大
-cd ~/xlao-main
+cd ~/xlao-xiaolaoda
 
 # 虾可爱
 cd ~/xlao-xiaolaoer
@@ -129,7 +129,7 @@ gh pr create \
 #### 审查流程（虾老大）
 
 ```bash
-cd ~/xlao-main
+cd ~/xlao-xiaolaoda
 
 # 查看所有 PR
 gh pr list
@@ -188,10 +188,10 @@ git merge origin/main
 sessions_send --agent xiaolaoer --message "需要你帮忙..."
 
 # 虾可爱联系虾老大
-sessions_send --agent main --message "Emma 的任务完成了，开了 PR：#xxx"
+sessions_send --agent xiaolaoda --message "Emma 的任务完成了，开了 PR：#xxx"
 
 # 虾算盘联系虾老大
-sessions_send --agent main --message "妮娜的账户需要紧急检查"
+sessions_send --agent xiaolaoda --message "妮娜的账户需要紧急检查"
 ```
 
 ---
