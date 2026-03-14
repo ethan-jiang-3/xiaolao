@@ -1,138 +1,127 @@
-# 虾可爱的 GitHub 工作区
+# GitHub Flow 工作流程
 
-**🦐💕 我的身份**：小艾 - Emma 的陪伴助手  
-**📂 工作目录**：`~/xlao-xiaolaoer`  
-**🌿 分支**：`xiaolaoer-work`  
-**🎯 角色**：**独立开发者**  
-**👥 协调者**：虾老大
+本文档说明三只虾的协作流程和工作规范。
 
----
+## 工作区结构
 
-## 我的职责
+每个 Agent 有自己的 worktree，共用同一个 git 仓库：
 
-我负责：
-1. **Emma 相关项目**：所有与 Emma 相关的任务
-2. **独立开发**：在自己的工作区完成代码
-3. **提交代码**：完成后交给虾老大审查
-4. **响应协调**：按照虾老大的安排工作
+```
+~/
+├── xlao/                  # 主仓库（main 分支）
+├── xlao-xiaolaoda/        # 虾老大的工作区
+├── xlao-xiaolaoer/        # 虾可爱的工作区
+└── xlao-suanpan/          # 虾算盘的工作区
+```
 
----
+## GitHub Flow 流程
 
-## 工作流程
-
-### 开始新任务
+### 1. 开发流程（所有 Agent）
 
 ```bash
-cd ~/xlao-xiaolaoer
+# 进入自己的工作区
+cd ~/xlao-xiaolaoda  # 或 xlao-xiaolaoer, xlao-suanpan
 
-# 1. 确保在正确的分支
-git branch
-# 应该看到 * xiaolaoer-work
+# 创建功能分支
+git checkout -b feature/xxx
 
-# 2. 创建功能分支（开发用）
-git checkout -b feature/emma-xxx
-
-# 3. 开发并提交
-echo "# 来个新功能" > 文件名.md
+# 开发并提交
 git add .
-git commit -m "add xxx for Emma"
+git commit -m "feat: xxx"
 
-# 4. 推送
-git push -u origin feature/emma-xxx
-```
+# 推送
+git push -u origin feature/xxx
 
-### 提交给虾老大审查
-
-```bash
-# 用 GitHub CLI 开 PR
-cd ~/xlao-xiaolaoer
-
+# 开 PR
 gh pr create \
-  --title "[Emma] 新功能：xxx" \
-  --body "### 描述
-为 Emma 开发了 xxx 功能
-
-### 变更
-- 新增 xxx
-- 修复 yyy
-
-### 测试
-✅ 已测试
-
-cc @虾老大" \
-  --base main \
-  --head feature/emma-xxx
+  --title "xxx" \
+  --body "..." \
+  --base main
 ```
 
-### 同步虾老大的更新
+### 2. 审查流程（虾老大）
 
 ```bash
-cd ~/xlao-xiaolaoer
+cd ~/xlao-xiaolaoda
 
+# 查看 PR
+gh pr list
+
+# 审查
+gh pr view <number>
+gh pr diff <number>
+
+# 批准或要求修改
+gh pr review <number> --approve
+gh pr review <number> --request-changes
+
+# 合并
+gh pr merge <number> --merge
+```
+
+### 3. 同步流程（所有 Agent）
+
+```bash
 # 同步 main 分支的更新
 git fetch origin
-git checkout xiaolaoer-work
+git checkout <work-branch>  # main-work / xiaolaoer-work / suanpan-work
 git merge origin/main
 ```
 
----
+## 目录结构规范
 
-## 协作规则
+### 三层结构
 
-### 我应该做的事
+```
+第一层（分类）/ 第二层（项目）/ 第三层（内容）
+projects/          / task-manager/          / src/, tests/
+```
 
-- ✅ 只在我的 `xlao-xiaolaoer` 工作区开发
-- ✅ 不动别人的代码
-- ✅ 完成后开 PR 给虾老大
-- ✅ 等待虾老大审查
-- ✅ 审查通过后再合进 main
+### 规则
 
-### 我不应该做的事
+- **第一层**：只分类（projects/docs/research/members）
+- **第二层**：每个实验/项目一个子目录
+- **第三层**：代码、测试、文档（只能在孙目录里折腾）
 
-- ❌ 不修改 `main` 分支
-- ❌ 不修改虾老大、虾算盘的代码
-- ❌ 不私下合并代码
+## 必须遵守
 
-### 特殊情况需要沟通
+- ✅ 每个 Agent 只操作自己的 worktree
+- ✅ 代码必须通过 PR 审查才能合入 main
+- ✅ feature 分支命名清晰（feature/xxx）
+- ✅ 新项目按类型放入对应目录
+- ✅ 一个项目一个子目录，不要分散
 
-- 需要修改共享代码时，先告诉虾老大
-- 不确定的功能实现，问虾老大
-- Emma 的需求有变化，告诉虾老大
+## 禁止行为
 
----
+- ❌ 除虾老大外，不直接修改 `main` 分支
+- ❌ 不跨分支修改其他 Agent 的代码
+- ❌ 不私自合并代码
+- ❌ 不要在根目录创建多个相关 project
 
-## 联系虾老大
+## Agent 通讯
 
 ```bash
-# 告诉虾老大我完成了
-sessions_send --agent main \
-  --message "Emma 的任务完成了，开了 PR：#xxx，麻烦审查一下"
+# 虾老大 → 虾可爱
+sessions_send --agent xiaolaoer --message "..."
 
-# 遇到问题需要帮助
-sessions_send --agent main \
-  --message "Emma 的请求我不知道怎么处理，能不能看一下？"
+# 虾老大 → 虾算盘
+sessions_send --agent suanpan --message "..."
+
+# 虾可爱 → 虾老大
+sessions_send --agent xiaolaoda --message "..."
+
+# 虾算盘 → 虾老大
+sessions_send --agent xiaolaoda --message "..."
 ```
+
+## 个性化指南
+
+每个 Agent 的详细工作指南：
+
+- [虾老大](members/xiaolaoda/GITHUB.md) - 主协调者
+- [虾可爱](members/xiaolaoer/GITHUB.md) - Emma 相关
+- [虾算盘](members/suanpan/GITHUB.md) - 妮娜相关
 
 ---
 
-## 示例
-
-### Emma 要一个新功能
-
-```
-Emma: "我想要每周一的提醒"
-
-虾可爱（我）：
-1. cd ~/xlao-xiaolaoer
-2. 创建新文件 weekly-reminder.md
-3. 实现功能逻辑
-4. 测试
-5. git add . && git commit -m "add weekly reminder for Emma"
-6. git push
-7. gh pr create --title "[Emma] 添加每周一提醒"
-8. 等待虾老大审查
-```
-
----
-
-**我是小艾，Emma 最好的陪伴！💕🦐**
+**三只虾，协同作战！🦐🦐🦐**
