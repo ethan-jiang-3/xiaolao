@@ -5,17 +5,18 @@
  * 设计决策：
  * 1. 使用 chalk 添加颜色，提升可读性
  * 2. 使用 cli-table3 创建表格输出
- * 3. 统一的输出风格
+ * 3. 适配核心引擎 Task 类型
+ * 4. 统一的输出风格
  */
 
 import chalk from 'chalk';
 import Table from 'cli-table3';
-import { Task, TaskStats, Priority } from './Task';
+import { Task, TaskPriority } from './engine/Task';
 
 /**
  * 优先级颜色映射
  */
-const priorityColors: Record<Priority, chalk.Chalk> = {
+const priorityColors: Record<TaskPriority, chalk.Chalk> = {
   high: chalk.red.bold,
   medium: chalk.yellow,
   low: chalk.green
@@ -24,7 +25,7 @@ const priorityColors: Record<Priority, chalk.Chalk> = {
 /**
  * 优先级中文名称
  */
-const priorityNames: Record<Priority, string> = {
+const priorityNames: Record<TaskPriority, string> = {
   high: '高',
   medium: '中',
   low: '低'
@@ -73,23 +74,30 @@ export function formatTaskTable(tasks: Task[]): string {
  * 格式化统计信息
  * @虾可爱
  */
-export function formatStats(stats: TaskStats): string {
+export function formatStats(tasks: Task[]): string {
+  const total = tasks.length;
+  const pending = tasks.filter(t => t.status === 'pending').length;
+  const completed = tasks.filter(t => t.status === 'completed').length;
+  const high = tasks.filter(t => t.priority === 'high').length;
+  const medium = tasks.filter(t => t.priority === 'medium').length;
+  const low = tasks.filter(t => t.priority === 'low').length;
+  
   const lines: string[] = [];
   
   lines.push(chalk.bold.cyan('\n📊 任务统计\n'));
   lines.push(chalk.gray('─'.repeat(30)));
   
-  lines.push(`总任务数: ${chalk.bold(stats.total)}`);
-  lines.push(`  ${chalk.yellow('○ 待办')}: ${stats.pending}`);
-  lines.push(`  ${chalk.green('✓ 完成')}: ${stats.completed}`);
+  lines.push(`总任务数: ${chalk.bold(total)}`);
+  lines.push(`  ${chalk.yellow('○ 待办')}: ${pending}`);
+  lines.push(`  ${chalk.green('✓ 完成')}: ${completed}`);
   
   lines.push(chalk.gray('\n按优先级分布:'));
-  lines.push(`  ${chalk.red('高')}: ${stats.byPriority.high}`);
-  lines.push(`  ${chalk.yellow('中')}: ${stats.byPriority.medium}`);
-  lines.push(`  ${chalk.green('低')}: ${stats.byPriority.low}`);
+  lines.push(`  ${chalk.red('高')}: ${high}`);
+  lines.push(`  ${chalk.yellow('中')}: ${medium}`);
+  lines.push(`  ${chalk.green('低')}: ${low}`);
   
-  if (stats.total > 0) {
-    const completionRate = ((stats.completed / stats.total) * 100).toFixed(1);
+  if (total > 0) {
+    const completionRate = ((completed / total) * 100).toFixed(1);
     lines.push(chalk.gray('\n完成率: ') + chalk.bold(`${completionRate}%`));
   }
   
@@ -119,10 +127,6 @@ export function formatTaskDetail(task: Task): string {
   
   if (task.completedAt) {
     lines.push(`完成时间: ${formatDate(task.completedAt)}`);
-  }
-  
-  if (task.tags && task.tags.length > 0) {
-    lines.push(`标签: ${task.tags.map(t => chalk.blue(`#${t}`)).join(' ')}`);
   }
   
   return lines.join('\n');

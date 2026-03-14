@@ -1,10 +1,12 @@
 /**
  * Task Manager CLI - 入口导出
  * @虾可爱
+ * 
+ * 挂载核心引擎 API（虾老大的 TaskManager）
  */
 
-export { Task, Priority, TaskStatus, TaskStats, CreateTaskParams, createTask, generateId } from './Task';
-export { TaskManager, TaskFilter, SortBy, SortOrder } from './TaskManager';
+export { Task, TaskPriority, TaskStatus } from './engine/Task';
+export { TaskManager, TaskListener } from './engine/TaskManager';
 export {
   formatTaskTable,
   formatStats,

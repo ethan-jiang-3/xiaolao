@@ -4,13 +4,14 @@
  * 
  * 设计决策：
  * 1. 使用 Commander.js 处理命令行参数
- * 2. 统一的错误处理
- * 3. 友好的帮助信息
+ * 2. 挂载核心引擎 API（虾老大的 TaskManager）
+ * 3. 统一的错误处理
+ * 4. 友好的帮助信息
  */
 
 import { Command } from 'commander';
-import { TaskManager } from './TaskManager';
-import { Priority } from './Task';
+import { TaskManager } from './engine/TaskManager';
+import { TaskPriority } from './engine/Task';
 import {
   formatTaskTable,
   formatStats,
@@ -34,22 +35,15 @@ program
   .command('add <title>')
   .description('添加新任务')
   .option('-p, --priority <level>', '优先级 (low|medium|high)', 'medium')
-  .option('-t, --tags <tags>', '标签，用逗号分隔')
-  .action((title: string, options: { priority: string; tags?: string }) => {
+  .action((title: string, options: { priority: string }) => {
     try {
-      const priority = options.priority as Priority;
+      const priority = options.priority as TaskPriority;
       if (!['low', 'medium', 'high'].includes(priority)) {
         error('优先级必须是 low、medium 或 high');
         process.exit(1);
       }
-
-      const tags = options.tags ? options.tags.split(',').map(t => t.trim()) : undefined;
       
-      const task = manager.addTask({
-        title,
-        priority,
-        tags
-      });
+      const task = manager.addTask(title, priority);
       
       success(`任务已添加: ${task.title}`);
       console.log(formatTaskDetail(task));
@@ -65,31 +59,19 @@ program
   .description('列出所有任务')
   .option('-s, --status <status>', '过滤状态 (pending|completed)')
   .option('-p, --priority <priority>', '过滤优先级 (low|medium|high)')
-  .option('--sort <field>', '排序字段 (createdAt|priority|title)', 'createdAt')
-  .option('--order <order>', '排序顺序 (asc|desc)', 'desc')
-  .action((options: {
-    status?: string;
-    priority?: string;
-    sort: string;
-    order: string;
-  }) => {
+  .action((options: { status?: string; priority?: string }) => {
     try {
       let tasks = manager.getAllTasks();
       
-      // Filter
+      // Filter by status
       if (options.status) {
         tasks = tasks.filter(t => t.status === options.status);
       }
+      
+      // Filter by priority
       if (options.priority) {
         tasks = tasks.filter(t => t.priority === options.priority);
       }
-      
-      // Sort
-      tasks = manager.sortTasks(
-        tasks,
-        options.sort as 'createdAt' | 'priority' | 'title',
-        options.order as 'asc' | 'desc'
-      );
       
       if (tasks.length === 0) {
         info('暂无任务');
@@ -121,12 +103,10 @@ program
         return;
       }
       
-      if (manager.completeTask(id)) {
+      const completed = manager.completeTask(id);
+      if (completed) {
         success('任务已完成！');
-        const updated = manager.getTask(id);
-        if (updated) {
-          console.log(formatTaskDetail(updated));
-        }
+        console.log(formatTaskDetail(completed));
       } else {
         error('完成任务失败');
         process.exit(1);
@@ -173,8 +153,8 @@ program
   .description('显示统计信息')
   .action(() => {
     try {
-      const stats = manager.getStats();
-      console.log(formatStats(stats));
+      const tasks = manager.getAllTasks();
+      console.log(formatStats(tasks));
     } catch (err) {
       error(`获取统计失败: ${err}`);
       process.exit(1);
