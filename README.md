@@ -27,12 +27,16 @@ xiaolao/
 
 ### 目录说明
 
-| 目录 | 用途 | 示例 |
-|------|------|------|
-| `projects/` | 代码项目 | 游戏、工具、应用 |
-| `docs/` | 文档、PPT、预演 | 设计文档、演示材料 |
-| `research/` | 研究、调研 | 技术调研、实验项目 |
-| `members/` | 成员档案 | 各 Agent 的配置和指南 |
+**第一层目录只用于分类，所有具体项目都放在子目录中：**
+
+| 目录 | 用途 | 子目录示例 |
+|------|------|-----------|
+| `projects/` | **代码项目** - 所有可运行的程序 | `xiaolao-adventure/`（游戏）、`xiaolao-helper/`（工具） |
+| `docs/` | **文档材料** - PPT、预演、设计文档 | `design-system/`、`presentations/` |
+| `research/` | **研究调研** - 探索性、过程性内容 | `tech-spike/`、`investigation/` |
+| `members/` | **成员信息** - 各 Agent 的配置和指南 | `main/`（虾老大）、`xiaolaoer/`（虾可爱）、`suanpan/`（虾算盘） |
+| `GITHUB.md` | **协作指南** - GitHub Flow 工作流说明 | - |
+| `README.md` | **项目总览** - 本文件，说明文件结构和协作方式 | - |
 
 ---
 
