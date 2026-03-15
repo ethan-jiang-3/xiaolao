@@ -1,0 +1,24 @@
+{
+  "name": "xiaolao-adventure",
+  "version": "0.1.0",
+  "description": "虾游记 - 三虾协作文字冒险游戏",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
+  "keywords": ["game", "adventure", "text-based", "xiaolao"],
+  "author": "虾家族",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  }
+}
